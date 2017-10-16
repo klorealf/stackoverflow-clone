@@ -1,7 +1,34 @@
 $(document).ready(function() {
-  // This is called after the document has loaded in its entirety
-  // This guarantees that any elements we bind to will exist on the page
-  // when we try to bind to them
+  $('ul').on('click', '.tweet-link',function(e){
+    e.preventDefault();
+    var $aTag = $(this)
+    $.ajax({
+      url: $(this).attr('href'),
+      method: 'get'
+    }).done(function(res){
+      $aTag.parent().append(res)
+    })
+  })
 
-  // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
+  $('#newTweet').click(function(e){
+    e.preventDefault()
+    $.ajax({
+      url: $(this).attr('href'),
+      method: 'get'
+    }).done(function(res){
+      $('#newTweetFormContainer').html(res)
+    })
+  })
+
+  $('#newTweetFormContainer').on('submit','#newTweetForm',function(e){
+    e.preventDefault()
+    $.ajax({
+      url: $(this).attr('action'),
+      method: $(this).attr('method'),
+      data: $(this).serialize()
+    }).done(function(res){
+      $('#newTweetFormContainer').html('')
+      $('ul').prepend(res)
+    })
+  })
 });

@@ -1,0 +1,8 @@
+<div id='newTweetFormContainer'>
+
+</div>
+<ul>
+  <% @tweets.each do |tweet| %>
+    <%= erb :'/tweets/_tweet', locals: {tweet_object: tweet} %>
+  <% end %>
+</ul>
