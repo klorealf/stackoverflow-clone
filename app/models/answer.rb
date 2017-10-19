@@ -1,3 +1,6 @@
 class Answer < ApplicationRecord
-  # Remember to create a migration!
+  belongs_to :user
+  belongs_to :question
+
+  validates :body, :user_id, :question_id, presence: :true
 end
