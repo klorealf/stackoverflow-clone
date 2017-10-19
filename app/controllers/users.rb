@@ -1,3 +1,4 @@
+#Signup
 get '/users/new' do
   @user = User.new
   erb :'users/new'
@@ -13,6 +14,7 @@ post '/users' do
   end
 end
 
+#login
 get '/login' do
   erb :"/users/login"
 end
@@ -26,4 +28,18 @@ post '/login' do
     @error = "Invalid login, try again"
     erb :'users/login'
   end
+end
+
+#logout
+get '/users/logout' do
+  session.clear
+  redirect "/"
+end
+
+#last item ALWAYS
+# Single User profile page
+get '/users/:id' do
+  @user = User.find_by(id: params[:id])
+  redirect '/' unless current_user.id == session[:user_id]
+  erb :'users/show'
 end
