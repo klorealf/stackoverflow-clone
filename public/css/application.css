@@ -1,3 +1,93 @@
-#banner{
-  color:black;
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: right;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li:first-child {
+  color: white;
+  float: left;
+}
+
+li a:hover {
+    background-color: #111;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    padding: 10px;
+  }
+
+.question-title {
+  font-weight: bold;
+  font-size: 18px;
+  width: 40%;
+}
+
+input[type=text], [type=password], [type=email], [type=username]   {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+.form {
+  width: 40%;
+  display: inline-block;
+  padding-top: 5%;
+  padding-left: 15%;
+}
+
+input[type=button], input[type=submit] {
+    background-color: #ff9933;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.current-user-questions {
+  width: 100%;
+  text-align: left;
+}
+
+.new-answer {
+  padding-top: 5%;
+  padding-left: 15%;
+}
+
+.questions-show {
+  padding-top: 5%;
+  padding-left: 5%;
+}
+
+.question-body {
+  font-weight: lighter;
+  padding-bottom: 50px;
+}
+
+.answer-link {
+  float: right;
+}
+
+.question-answer {
+  padding-top: 10px;
+  color: black;
 }

@@ -1,13 +1,11 @@
-<center><div>
+<ul>
+    <li class="banner"><a href="/">DBC OVERFLOW</a></li>
   <% if logged_in? %>
-    <a href="/users/:id"><%= current_user.name %></a>
-    <br>
-    <a href="/sessions/logout"> Log Out</a>
+    <li><a href="/sessions/logout"> Log Out</a></li>
+    <li><a href='/questions/new'> Ask a Question! </a></li>
+    <li><a href="/users/:id"><%= current_user.name %></a></li>
   <% else %>
-    <div>New Users: <a href="/users/new">Sign Up</a> </div>
-    <div>Existing Users: <a href='/sessions/new'>Log In</a> </div>
+    <li><a href="/users/new">Sign Up</a></li>
+    <li><a href='/sessions/new'>Log In</a></li>
   <% end %>
-</div>
-
-  <br>
-
+</ul>

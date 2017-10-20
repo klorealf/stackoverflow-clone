@@ -3,6 +3,12 @@
   <br>
   <center><h2><%= current_user.username %>'s Profile</h2>
 
-  <a href= "/sessions/logout"> Log Out </a>
+<center><div class="current-user-questions">
+  <% current_user.questions.each do |question| %>
+    <br>
+    <a class="question-title" href='/questions/<%= question.id %>'><%= question.title %></a>
+    <div class="question-answer">Answer #: <%= question.answers.length %></div>
+  <%end%>
+</div></center>
 
 </div>
