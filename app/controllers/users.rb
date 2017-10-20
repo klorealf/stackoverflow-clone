@@ -8,7 +8,8 @@ post '/users' do
   @user = User.new(params[:user])
   if @user.save
     session[:user_id] = @user.id
-    redirect "/users/#{@user.id}"
+    # use to be:    redirect "/users/#{@user.id}" Changed from here
+    redirect "/"
   else
     erb :"users/new"
   end

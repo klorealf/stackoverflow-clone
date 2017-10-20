@@ -12,15 +12,15 @@ get "/answers/:id" do
   erb :"answers/show"
 end
 
-post "/answers" do
-  redirect "/" unless logged_in?
-  @answer = Answer.new(body: params[answer][body],
-                       user: = current_user
+# post "/answers" do
+#   redirect "/" unless logged_in?
+#   @answer = Answer.new(body: params[answer][body],
+#                        user: = current_user
 
-                        )
-  if @answer.save
-    redirect ""
-end
+#                         )
+#   if @answer.save
+#     redirect ""
+# end
 
 delete "/answers" do
   "delete answer"

@@ -4,6 +4,8 @@ class User < ApplicationRecord
 
   validates :name, :username, :email, presence: true
   validates :username, :email, uniqueness: :true
+# Thought this was cool from a previous assignment
+  validates :password, length: {minimum: 2}
 
   include BCrypt
 
