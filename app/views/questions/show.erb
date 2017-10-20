@@ -1,0 +1,31 @@
+<div class="container">
+
+
+  <div class="questions-show">
+
+    <h6>Question Answers #: <%= @question.answers.length %> </h6>
+
+    <h2><%= @question.title %></h2>
+
+    <h4 class="question-body"><%= @question.body %></h4>
+    <% if logged_in? && own_question?(@question) %>
+      <a href="/questions/<%=@question.id%>/edit">Edit Question</a>
+      <%= erb :"questions/_delete", layout: false,locals: {question: @question} %>
+    <% end %>
+  </div>
+
+<br><hr><br><br>
+
+  <%= erb :"partials/_new_answer", layout: false, locals: {question: @question} %>
+
+  <% @question.answers.each do |answer| %>
+    <a href="/questions/<%= @question.id %>/answers/<%= answer.id %>"><%= answer.body %></a>
+    <% if own_answer?(answer) %>
+      <a href="/questions/<%= @question.id %>/answers/<%= answer.id %>/edit">: Edit</a>
+      <%= erb :"answers/_delete", layout: false,locals: {question: @question, answer: answer} %>
+    <% end %>
+    <br><br>
+  <%end%>
+
+
+</div>
