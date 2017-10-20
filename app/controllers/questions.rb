@@ -1,34 +1,26 @@
-get '/' do
-  redirect '/questions'
-end
-
 #will show a list of all questions
 get '/questions' do
   @questions = Question.order('created_at DESC')
-  @ans_num = {}
-  @questions.each do |question|
-    @ans_num[question.id] = question.answers.count
-  end
-
-  @names = {}
-  @usernames = {}
-  @questions.each do |question|
-    user = User.find(question.user_id)
-    @usernames[question.id] = user.username
-    @names[question.id] = user.name
-  end
+  # There were variables decleared here that I think can possibly be better achieved using active record, put code in scrap_paper.md
   erb :'question/index'
 end
 
 #will provide form for creating new question
 get '/questions/new' do
+  redirect "/" unless logged_in?
   erb :'question/new'
 end
 
-post '/questions/new' do
-  question_user = User.find_by(id: params[:id])
-  question = Question.create(user_id: question_user.id, title: params[:title], text: params[:body])
-  redirect '/questions/#{question.id}'
+post '/questions' do
+  # current_user
+  # question_user = User.find_by(id: params[:id])
+  @question = Question.new(user_id: current_user.id, title: params[:question][:title], body: params[:question][:body])
+  if @question.save
+    redirect "/questions/#{@question.id}"
+  else
+    # Put error messaging in
+    redirect '/questions/new'
+  end
 end
 
 #show individual question
@@ -39,3 +31,30 @@ get '/questions/:question_id' do
  erb :"question/show"
 end
 
+get "/questions/:question_id/answers" do
+  @question = Question.find_by(id: params[:question_id])
+  redirect "/questions/#{@question.id}"
+end
+
+get "/questions/:question_id/answers/new" do
+  redirect "/" unless logged_in?
+  @question = Question.find_by(id: params[:question_id])
+  erb :"answers/new"
+end
+
+post "/questions/:question_id/answers" do
+  @question = Question.find_by(id: params[:question_id])
+  @answer = Answer.new(body: params[:answer][:body], user_id: current_user.id, question_id: @question.id)
+  if @answer.save
+    redirect "/questions/#{@question.id}"
+  else
+    #Add error messaging
+    redirect "/questions/#{@question.id}/answers/new"
+  end
+end
+
+get "/questions/:question_id/answers/:answer_id" do
+  @question = Question.find_by(id: params[:question_id])
+  @answer = Answer.find_by(id: params[:answer_id])
+  erb :"answers/show"
+end

@@ -1,12 +1,16 @@
 <div class="container">
   <br>
-  Question Title
+  <div>Question Title</div>
   <h3><%= @question.title %></h3>
   <br><br>
-  Question Body
+  <div>Question Body</div>
   <h4><%= @question.body %></h4>
   <br><br>
+  <%= erb :"partials/_new_answer", layout: false, locals: {question: @question} %>
+  <br><br>
+  <div>Question Answers #: <%= @question.answers.length %></div>
+  <br><br>
   <% @question_answers.each do |answer| %>
-    <%= answer.body %>
+    <%= answer.body %><br><br>
   <%end%>
 </div>
