@@ -14,9 +14,9 @@ end
 post '/questions' do
   # current_user
   # question_user = User.find_by(id: params[:id])
-  question = Question.new(user_id: current_user.id, title: params[:question][:title], body: params[:question][:body])
-  if question.save
-    redirect "/questions/#{question.id}"
+  @question = Question.new(user_id: current_user.id, title: params[:question][:title], body: params[:question][:body])
+  if @question.save
+    redirect "/questions/#{@question.id}"
   else
     # Put error messaging in
     redirect '/questions/new'
@@ -32,8 +32,8 @@ get '/questions/:question_id' do
 end
 
 get "/questions/:question_id/answers" do
-  question = Question.find_by(id: params[:question_id])
-  redirect "/questions/#{question.id}"
+  @question = Question.find_by(id: params[:question_id])
+  redirect "/questions/#{@question.id}"
 end
 
 get "/questions/:question_id/answers/new" do
@@ -42,7 +42,14 @@ get "/questions/:question_id/answers/new" do
   erb :"answers/new"
 end
 
+post "/questions/:question_id/answers" do
+  @question = Question.find_by(id: params[:question_id])
+  @answer = Answer.new(body: params[:answer][:body], user_id: current_user.id, question_id: @question.id)
 
-
-
-
+  if @answer.save
+    redirect "/questions/#{@question.id}"
+  else
+    #Add error messaging
+    redirect "/questions/#{@question.id}/answers/new"
+  end
+end

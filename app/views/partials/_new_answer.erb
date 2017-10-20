@@ -1,7 +1,6 @@
 <div class="container">
   <% if logged_in? %>
-  <!-- Fix Route with nested resource -->
-    <a href='/answer/new'> Ask a Question! </a>
+    <a href="/questions/<%= @question.id %>/answers/new"> Answer a Question! </a>
   <% end %>
 </div>
 

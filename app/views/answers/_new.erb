@@ -1,4 +1,4 @@
-<form method="post" action="/answers">
+<form method="post" action="/questions/<%= @question.id %>/answers">
   <div>
     <label name="body">Name</label>
     <input type="text" name="answer[body]" placeholder="Answer the Question!">
