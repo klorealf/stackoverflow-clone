@@ -1,16 +1,18 @@
 <div class="container">
-  <br>
-  <div>Question Title</div>
-  <h3><%= @question.title %></h3>
-  <br><br>
-  <div>Question Body</div>
-  <h4><%= @question.body %></h4>
-  <br><br>
-  <%= erb :"partials/_new_answer", layout: false, locals: {question: @question} %>
-  <br><br>
-  <div>Question Answers #: <%= @question.answers.length %></div>
-  <br><br>
-  <% @question_answers.each do |answer| %>
-    <%= answer.body %><br><br>
-  <%end%>
+
+  <div class="questions-show">
+
+    <h6>Question Answers #: <%= @question.answers.length %> </h6>
+
+    <h2><%= @question.title %></h2>
+
+    <h4 class="question-body"><%= @question.body %></h4>
+    <hr>
+    <% @question_answers.each do |answer| %>
+      <p class="question-answer"><%= answer.body %></p>
+    <%end%>
+
+  </div>
+
+    <%= erb :"partials/_new_answer", layout: false, locals: {question: @question} %>
 </div>

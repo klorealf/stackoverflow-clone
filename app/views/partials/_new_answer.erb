@@ -1,6 +1,6 @@
 <div class="container">
   <% if logged_in? %>
-    <a href="/questions/<%= @question.id %>/answers/new"> Answer a Question! </a>
+    <a class="answer-link" href="/questions/<%= @question.id %>/answers/new"> Answer this question! </a>
   <% end %>
 </div>
 

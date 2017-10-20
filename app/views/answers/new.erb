@@ -1,7 +1,9 @@
-<h2>New Answer</h2><br><br>
-
+<div class="container">
+<div class="new-answer">
 <h2><%= @question.title %></h2><br>
 <div>Created By: <%= @question.user.username %></div><br>
 <div><%= @question.body %></div><br>
+</div>
 
 <%= erb :"answers/_new", layout: false, locals: {question: @question} %>
+</div>

@@ -1,9 +1,8 @@
-<form method="post" action="/questions/<%= @question.id %>/answers">
-  <div>
+<div class="form">
+  <form method="post" action="/questions/<%= @question.id %>/answers">
     <label name="body">Name</label>
     <input type="text" name="answer[body]" placeholder="Answer the Question!">
-  </div>
-  <div>
+
     <input type='submit' value="Submit">
+    </form>
   </div>
-</form>
