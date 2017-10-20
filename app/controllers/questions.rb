@@ -26,8 +26,8 @@ end
 #show individual question
 get '/questions/:question_id' do
  @question = Question.find(params[:question_id])
- @question_user = @question.user
- @question_answers = @question.answers
+ # @question_user = @question.user
+ # @question_answers = @question.answers
  erb :"question/show"
 end
 
@@ -96,20 +96,27 @@ end
 get "/questions/:question_id/answers/:answer_id/edit" do
   @question = Question.find_by(id: params[:question_id])
   @answer = Answer.find_by(id: params[:answer_id])
-binding.pry
+# binding.pry
   erb :"answers/edit"
 end
 
 put "/questions/:question_id/answers/:answer_id" do
   @question = Question.find_by(id: params[:question_id])
   @answer = Answer.find_by(id: params[:answer_id])
-binding.pry
   redirect "/" unless own_answer?(@answer)
-  @answer.assign_attributes(body:[:answer][:body])
+  @answer.assign_attributes(body: params[:answer][:body])
   if @answer.save
-    redirect "/questions/#{@question.id}/answers/#{@answer.id}"
+    redirect "/questions/#{@question.id}"
   else
     #Add error messaging
     erb :"answer/edit"
   end
+end
+
+delete "/questions/:question_id/answers/:answer_id" do
+  @question = Question.find_by(id: params[:question_id])
+  @answer = Answer.find_by(id: params[:answer_id])
+  redirect "/" unless own_answer?(@answer)
+  @answer.destroy
+  redirect "/"
 end

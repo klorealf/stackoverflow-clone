@@ -1,7 +1,7 @@
 <form method="post" action="/questions/<%= @question.id %>/answers/<%= @answer.id %>">
   <input type="hidden" name="_method" value="put">
   <div>
-    <input type="text" name="answer[body]" view="<%= @answer.body %>">
+    <input type="text" name="answer[body]" value="<%= @answer.body %>">
   </div>
   <div>
     <input type='submit' value="Update">
