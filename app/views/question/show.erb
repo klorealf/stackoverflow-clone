@@ -1,5 +1,6 @@
 <div class="container">
 
+
   <div class="questions-show">
 
     <h6>Question Answers #: <%= @question.answers.length %> </h6>
@@ -15,4 +16,24 @@
   </div>
 
     <%= erb :"partials/_new_answer", layout: false, locals: {question: @question} %>
+
+
+  <% if logged_in? && own_question?(@question) %>
+  <a href="/questions/<%=@question.id%>/edit">Edit</a>
+
+  <form action="/questions/<%= @question.id %>" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit" value="Delete">
+  </form>
+  <% end %>
+
+
+  <% @question.answers.each do |answer| %>
+  <a href="/questions/<%= @question.id %>/answers/<%= answer.id %>"><%= answer.body %></a> :
+    <% if own_answer?(answer) %>
+      <a href="/questions/<%= @question.id %>/answers/<%= answer.id %>/edit">Edit</a>
+    <% end %>
+    <br><br>
+  <%end%>
+
 </div>

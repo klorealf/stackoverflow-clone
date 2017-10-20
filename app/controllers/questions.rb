@@ -26,9 +26,43 @@ end
 #show individual question
 get '/questions/:question_id' do
  @question = Question.find(params[:question_id])
- @question_user = @question.user
- @question_answers = @question.answers
+ # @question_user = @question.user
+ # @question_answers = @question.answers
  erb :"question/show"
+end
+
+#return an HTML form for editing a question
+get '/questions/:id/edit' do
+  @question = Question.find_by(id: params[:id])
+  if @question
+    erb :'question/edit'
+  else
+    erb :"question/index"
+  end
+end
+
+#update a specific question
+put '/questions/:id' do
+  @question = Question.find_by(id: params[:id])
+    # redirect "/" unless own_question?(@question)
+    @question.update(params[:question])
+    if @question.save
+     redirect "/questions/#{@question.id}"
+    else
+      @errors = @question.errors.full_messages
+      erb :"question/edit"
+    end
+end
+
+#delete a specific question
+delete '/questions/:id' do
+    @question = Question.find_by(id: params[:id])
+    if own_question?(@question)
+      @question.destroy
+      redirect "/questions/#{@question.id}"
+    else
+      "error"
+    end
 end
 
 get "/questions/:question_id/answers" do
@@ -57,4 +91,32 @@ get "/questions/:question_id/answers/:answer_id" do
   @question = Question.find_by(id: params[:question_id])
   @answer = Answer.find_by(id: params[:answer_id])
   erb :"answers/show"
+end
+
+get "/questions/:question_id/answers/:answer_id/edit" do
+  @question = Question.find_by(id: params[:question_id])
+  @answer = Answer.find_by(id: params[:answer_id])
+# binding.pry
+  erb :"answers/edit"
+end
+
+put "/questions/:question_id/answers/:answer_id" do
+  @question = Question.find_by(id: params[:question_id])
+  @answer = Answer.find_by(id: params[:answer_id])
+  redirect "/" unless own_answer?(@answer)
+  @answer.assign_attributes(body: params[:answer][:body])
+  if @answer.save
+    redirect "/questions/#{@question.id}"
+  else
+    #Add error messaging
+    erb :"answer/edit"
+  end
+end
+
+delete "/questions/:question_id/answers/:answer_id" do
+  @question = Question.find_by(id: params[:question_id])
+  @answer = Answer.find_by(id: params[:answer_id])
+  redirect "/" unless own_answer?(@answer)
+  @answer.destroy
+  redirect "/"
 end
