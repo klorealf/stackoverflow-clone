@@ -1,10 +1,14 @@
 <div class="container">
   <br>
-  Question Title
+  <div>Question Title</div>
   <h3><%= @question.title %></h3>
   <br><br>
-  Question Body
+  <div>Question Body</div>
   <h4><%= @question.body %></h4>
+  <br><br>
+
+  <br><br>
+  <div>Question Answers</div>
   <br><br>
   <% @question_answers.each do |answer| %>
     <%= answer.body %>

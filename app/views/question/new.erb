@@ -2,10 +2,7 @@
 
     Username:<br>
 <!-- binding.pry -->
-  <form id='question-form' action='/questions/new' method='POST'>
-    <input type='text' name='question[user_id]' class="input input-round" placeholder="Anonymous"><br>
-    <br>
-    <br>
+  <form id='question-form' action='/questions' method='post'>
     Title:<br>
     <input type='text' name='question[title]' class="input input-round" placeholder="Untitled"><br>
     <br>
@@ -13,10 +10,10 @@
 
     Body:<br>
       <label for="question[body]" class="label"></label>
-    <textarea name="question[body]" class="textarea rows='10' cols='100' input input-round"><%= @question.try(:body) %></textarea>
-    <br>
-
+      <input type='text' name='question[body]' class="input input-round" placeholder="Ask Here"><br>
+      <!-- I have placed in a seperate file some code I have not seen before and could not comment out about text areas, put in scrap-paper.md -->
   <input type="submit" name="submit" value="Submit" class="input button">
   </form>
 
 </div>
+
