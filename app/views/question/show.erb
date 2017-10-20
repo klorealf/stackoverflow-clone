@@ -22,7 +22,11 @@
   <br><br>
   <div>Question Answers #: <%= @question.answers.length %></div>
   <br><br>
-  <% @question_answers.each do |answer| %>
-    <%= answer.body %><br><br>
+  <% @question.answers.each do |answer| %>
+  <a href="/questions/<%= @question.id %>/answers/<%= answer.id %>"><%= answer.body %></a> :
+    <% if own_answer?(answer) %>
+      <a href="/questions/<%= @question.id %>/answers/<%= answer.id %>/edit">Edit</a>
+    <% end %>
+    <br><br>
   <%end%>
 </div>

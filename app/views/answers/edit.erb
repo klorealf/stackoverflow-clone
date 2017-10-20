@@ -1,0 +1,8 @@
+<h2>Update Answer</h2><br><br>
+
+<h2><%= @question.title %></h2><br>
+<div>Created By: <%= @question.user.username %></div><br>
+<div><%= @question.body %></div><br>
+
+<%= erb :"answers/_edit", layout: false, locals: {question: @question, answers: @answer} %>
+
