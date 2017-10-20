@@ -31,6 +31,40 @@ get '/questions/:question_id' do
  erb :"question/show"
 end
 
+#return an HTML form for editing a question
+get '/questions/:id/edit' do
+  @question = Question.find_by(id: params[:id])
+  if @question
+    erb :'question/edit'
+  else
+    erb :"question/index"
+  end
+end
+
+#update a specific question
+put '/questions/:id' do
+  @question = Question.find_by(id: params[:id])
+    # redirect "/" unless own_question?(@question)
+    @question.update(params[:question])
+    if @question.save
+     redirect "/questions/#{@question.id}"
+    else
+      @errors = @question.errors.full_messages
+      erb :"question/edit"
+    end
+end
+
+#delete a specific question
+delete '/questions/:id' do
+    @question = Question.find_by(id: params[:id])
+    if own_question?(@question)
+      @question.destroy
+      redirect "/questions/#{@question.id}"
+    else
+      "error"
+    end
+end
+
 get "/questions/:question_id/answers" do
   @question = Question.find_by(id: params[:question_id])
   redirect "/questions/#{@question.id}"
