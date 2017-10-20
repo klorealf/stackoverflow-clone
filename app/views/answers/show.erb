@@ -1,1 +1,4 @@
-<%= erb :"answers/_answer", layout: false, locals: {answer: @answer} %>
+
+<h3>Answer Show Page</h3>
+
+<%= erb :"answers/_answer", layout: false, locals: {question: @question, answer: @answer} %>

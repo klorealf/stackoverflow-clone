@@ -1,12 +1,7 @@
-<div>
-  <h2>Answering this Question: <%= answer.question.title %> </h2>
-</div>
-
-<div>
-  <h2>Created By: <%= answer.user.username %> </h2>
-</div>
-
-<div>
-  <h3><%= answer.body %></h3>
-</div>
-
+<h2>Question: <%= @question.title %></h2><br>
+<div>Question By: <%= @question.user.username %></div><br>
+<div>Question Body: <%= @question.body %></div><br>
+<br><br><br>
+<h2>Answer</h2>
+<h2><%= @answer.body %></h2><br>
+<div>Answer By: <%= @answer.user.username %></div><br>

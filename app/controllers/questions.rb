@@ -45,11 +45,16 @@ end
 post "/questions/:question_id/answers" do
   @question = Question.find_by(id: params[:question_id])
   @answer = Answer.new(body: params[:answer][:body], user_id: current_user.id, question_id: @question.id)
-
   if @answer.save
     redirect "/questions/#{@question.id}"
   else
     #Add error messaging
     redirect "/questions/#{@question.id}/answers/new"
   end
+end
+
+get "/questions/:question_id/answers/:answer_id" do
+  @question = Question.find_by(id: params[:question_id])
+  @answer = Answer.find_by(id: params[:answer_id])
+  erb :"answers/show"
 end
