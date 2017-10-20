@@ -26,8 +26,6 @@ end
 #show individual question
 get '/questions/:question_id' do
  @question = Question.find(params[:question_id])
- # @question_user = @question.user
- # @question_answers = @question.answers
  erb :"question/show"
 end
 
