@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-  has_many :answers
-  has_many :questions
+  has_many :answers, dependent: :destroy
+  has_many :questions, dependent: :destroy
 
   validates :name, :username, :email, presence: true
   validates :username, :email, uniqueness: :true
@@ -8,7 +8,7 @@ class User < ApplicationRecord
   include BCrypt
 
   #creating a user password
-    def password
+  def password
     @password ||= Password.new(password_hash)
   end
 
