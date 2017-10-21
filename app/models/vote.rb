@@ -1,5 +1,7 @@
 class Vote < ApplicationRecord
-  belongs_to :voteable, :polymorphic: :true
+  belongs_to :user
+  belongs_to :voteable, polymorphic: :true
 
-  validates :body, :user_id, presence: :true
+
+  validates :voteable_id, :user_id, presence: :true
 end
