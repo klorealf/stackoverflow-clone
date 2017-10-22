@@ -1,4 +1,6 @@
 class Answer < ApplicationRecord
+  include VoteHelper
+
   belongs_to :user
   belongs_to :question
   has_many :comments, as: :commentable

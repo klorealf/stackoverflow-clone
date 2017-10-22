@@ -7,16 +7,14 @@ class User < ApplicationRecord
 # Thought this was cool from a previous assignment does not work yet
   # validates :password_hash, length: {minimum: 2}
 
-  include BCrypt
-
   #creating a user password
   def password
-    @password ||= Password.new(password_hash)
+    @password ||= BCrypt::Password.new(password_hash)
   end
 
 #creating the password hash
   def password=(new_password)
-    @password = Password.create(new_password)
+    @password = BCrypt::Password.create(new_password)
     self.password_hash = @password
   end
 
