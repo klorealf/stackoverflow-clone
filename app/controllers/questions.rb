@@ -1,8 +1,6 @@
 #will show a list of all questions
 get '/questions' do
-  @questions = Question.order('created_at DESC')
-  # There were variables decleared here that I think can possibly be better achieved using active record, put code in scrap_paper.md
-  erb :'questions/index'
+  redirect "/"
 end
 
 #will provide form for creating new question

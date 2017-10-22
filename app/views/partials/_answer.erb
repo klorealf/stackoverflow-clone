@@ -1,0 +1,18 @@
+<div class="answer-show">
+  <h2><%= answer.body %></h2>
+  <p>
+    <span class="answer_points">Points: <%= answer.score %> |</span>
+    <span class="answer_comments">Comments: <%= answer.comments.length %> |</span>
+    <span class="question-author"> By: <%= @answer.user.username %>
+  </p>
+<br>
+  <div>
+    <%= erb :"partials/_upvote_form", layout: false, locals: {vote_item: answer} %>
+    <%= erb :"partials/_downvote_form", layout: false, locals: {vote_item: answer} %>
+  </div>
+
+  <% if own_answer?(answer) %>
+    <a href="/questions/<%= @question.id %>/answers/<%= answer.id %>/edit">Edit</a>
+    <%= erb :"answers/_delete", layout: false,locals: {question: @question, answer: answer} %>
+  <% end %>
+</div>

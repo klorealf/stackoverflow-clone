@@ -1,11 +1,3 @@
-<h2>Question:     <%= question.title %></h2><br>
-<div>Question By:     <%= question.user.username %></div><br>
-<div>Question Body:     <%= question.body %></div><br>
-<br><br><br><br>
-<h2><%= answer.body %></h2><br>
-<div>Answer By: <%= answer.user.username %></div><br>
-
-<% if own_answer?(answer) %>
-  <a href="/questions/<%= @question.id %>/answers/<%= answer.id %>/edit">Edit</a>
-  <%= erb :"answers/_delete", layout: false,locals: {question: @question, answer: answer} %>
-<% end %>
+<%= erb :"partials/_question", layout: false, locals: {question: @question} %>
+<hr>
+<%= erb :"partials/_answer", layout: false, locals: {answer: @answer} %>

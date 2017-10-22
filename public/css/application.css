@@ -68,19 +68,28 @@ input[type=button], input[type=submit] {
   text-align: left;
 }
 
+.vote-container{
+  padding-left: 5%;
+}
+
 .new-answer {
   padding-top: 5%;
   padding-left: 15%;
 }
 
 .questions-show {
-  padding-top: 5%;
+/*  padding-top: 5%;*/
   padding-left: 5%;
 }
 
+.answer-show {
+/*  padding-top: 5%;*/
+  padding-left: 5%;
+}
 .question-body {
   font-weight: lighter;
   padding-bottom: 50px;
+  padding-left: 5%;
 }
 
 .answer-link {
@@ -88,7 +97,7 @@ input[type=button], input[type=submit] {
 }
 
 .question-answer {
-  padding-top: 10px;
+  /*padding-top: 10px;*/
   color: black;
 }
 

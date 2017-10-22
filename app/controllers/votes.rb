@@ -5,40 +5,88 @@ end
 
 post "/upvotes/new" do
   if logged_in?
-    if params[:votable_type] == "Question"
-      voteable_object = Question.find_id(id: params[:votable_id])
-    # else  params[:votable_type] == "Answer"
-    #   voteable_object = Answer.find_id(id: params[:votable_id])
-    end
-    binding.pry
-        #Put in comment functionality later
-    upvote = Vote.new(voteable: voteable_object, user: current_user, vote_direction: 1)
-    if upvote.save
-      redirect "/"
+    if params[:voteable_type] == "Question"
+      voteable_object = Question.find_by(id: params[:voteable_id])
+      upvote = Vote.new(voteable: voteable_object, user: current_user, vote_direction: 1)
+      current_vote = Vote.find_by(user: current_user, voteable: voteable_object)
+      if current_vote
+        current_vote.destroy
+      end
+      if upvote.save
+        redirect "/questions/#{voteable_object.id}"
+      else
+        redirect "/"
+      end
+    elsif params[:voteable_type] == "Answer"
+      voteable_object = Answer.find_by(id: params[:voteable_id])
+      answer_question = voteable_object.question
+      upvote = Vote.new(voteable: voteable_object, user: current_user, vote_direction: 1)
+      current_vote = Vote.find_by(user: current_user, voteable: voteable_object)
+      if current_vote
+        current_vote.destroy
+      end
+      if upvote.save
+        redirect "/questions/#{answer_question.id}/answers/#{voteable_object.id}"
+      else
+        redirect "/"
+      end
     else
-      redirect "/users/#{current_user.id}"
+      voteable_object = Comment.find_by(id: params[:voteable_id])
+      upvote = Vote.new(voteable: voteable_object, user: current_user, vote_direction: 1)
+      current_vote = Vote.find_by(user: current_user, voteable: voteable_object)
+      if current_vote
+        current_vote.destroy
+      end
+      if upvote.save
+          redirect "/"
+      else
+          redirect "/"
+      end
     end
   end
   redirect "/"
 end
 
-# post "/votes/questions/:question_id/upvote" do
-# # Need to ajax, current redirect could be jaring
-#   if logged_in?
-#     question = Question.find_by(id: params[:question_id])
-#     up_vote = Vote.new(user: current_user, voteable: question, vote_direction: 1)
-#     if up_vote.save
-#       redirect "/questions/#{question.id}"
-#     else
-#     # Fix this redirect as well, possibly put error messaging in as well, like suggestion box and ajax
-#       redirect "/"
-#     end
-#   end
-#   redirect "/questions"
-# end
-
-
-# get "/votes/questions/:question_id/downvote" do
-#   q upvote
-# end
-# Do comments Votes once conmments is working properly
+post "/downvotes/new" do
+  if logged_in?
+    if params[:voteable_type] == "Question"
+      voteable_object = Question.find_by(id: params[:voteable_id])
+      downvote = Vote.new(voteable: voteable_object, user: current_user, vote_direction: -1)
+      current_vote = Vote.find_by(user: current_user, voteable: voteable_object)
+      if current_vote
+        current_vote.destroy
+      end
+      if downvote.save
+        redirect "/questions/#{voteable_object.id}"
+      else
+        redirect "/"
+      end
+    elsif params[:voteable_type] == "Answer"
+      voteable_object = Answer.find_by(id: params[:voteable_id])
+      answer_question = voteable_object.question
+      downvote = Vote.new(voteable: voteable_object, user: current_user, vote_direction: -1)
+      current_vote = Vote.find_by(user: current_user, voteable: voteable_object)
+      if current_vote
+        current_vote.destroy
+      end
+      if downvote.save
+        redirect "/questions/#{answer_question.id}/answers/#{voteable_object.id}"
+      else
+        redirect "/"
+      end
+    else
+      voteable_object = Comment.find_by(id: params[:voteable_id])
+      downvote = Vote.new(voteable: voteable_object, user: current_user, vote_direction: -1)
+      current_vote = Vote.find_by(user: current_user, voteable: voteable_object)
+      if current_vote
+        current_vote.destroy
+      end
+      if downvote.save
+          redirect "/"
+      else
+          redirect "/"
+      end
+    end
+  end
+  redirect "/"
+end

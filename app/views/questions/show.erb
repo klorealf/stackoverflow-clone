@@ -1,27 +1,6 @@
-<div class="container">
-
-  <div class="questions-show">
-    <h2><%= @question.title %></h2>
-    <p>
-      <span class = "question_points"> Points: <%= @question.score %> |</span>
-      <span class = "question_answers">  Answers: <%= @question.answers.length %> |</span>
-      <span class = "question_points">  Comments: <%= @question.comments.length %></span>
-    </p>
-
-<br><br>
-
-  <div class="question-body"><strong><%= @question.body %></strong></div>
-    <% if logged_in? && own_question?(@question) %>
-      <a href="/questions/<%=@question.id%>/edit">Edit Question</a>
-      <%= erb :"questions/_delete", layout: false,locals: {question: @question} %>
-    <% end %>
-  </div>
-
-<%= erb :"partials/_upvote_form", layout: false, locals: {vote_item: @question} %>
-
+<%= erb :"partials/_question", layout: false, locals: {question: @question} %>
 <br><hr><br><br>
-
-  <%= erb :"partials/_new_answer", layout: false, locals: {question: @question} %>
+<%= erb :"partials/_new_answer", layout: false, locals: {question: @question} %>
 
   <% @question.answers.each do |answer| %>
     <a href="/questions/<%= @question.id %>/answers/<%= answer.id %>"><%= answer.body %></a>
@@ -31,6 +10,3 @@
     <% end %>
     <br><br>
   <%end%>
-
-
-</div>
