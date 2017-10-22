@@ -30,8 +30,8 @@ get '/questions/:question_id' do
 end
 
 #return an HTML form for editing a question
-get '/questions/:id/edit' do
-  @question = Question.find_by(id: params[:id])
+get '/questions/:question_id/edit' do
+  @question = Question.find_by(id: params[:question_id])
   if @question
     erb :'questions/edit'
   else
@@ -40,8 +40,8 @@ get '/questions/:id/edit' do
 end
 
 #update a specific question
-put '/questions/:id' do
-  @question = Question.find_by(id: params[:id])
+put '/questions/:question_id' do
+  @question = Question.find_by(id: params[:question_id])
     # redirect "/" unless own_question?(@question)
     @question.update(params[:question])
     if @question.save
@@ -53,8 +53,8 @@ put '/questions/:id' do
 end
 
 #delete a specific question
-delete '/questions/:id' do
-    @question = Question.find_by(id: params[:id])
+delete '/questions/:question_id' do
+    @question = Question.find_by(id: params[:question_id])
     if own_question?(@question)
       @question.destroy
       redirect "/"

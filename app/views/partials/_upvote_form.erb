@@ -1,0 +1,5 @@
+<form class="upvote_form" action="/upvotes/new"  method="post">
+  <input type="hidden" name="voteable_type" vaule=<%= vote_item.class %>>
+  <input type="hidden" name="voteable_id" vaule=<%= vote_item.id %>>
+  <button class="upvote" type="submit" name="submit">Upvote!</button>
+</form>

@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_many :questions, dependent: :destroy
   has_many :answers, dependent: :destroy
   has_many :comments, dependent: :destroy
+
   has_many :question_comments, through: :questions, source: :comments
   has_many :answers_comments, through: :answers, source: :comments
   has_many :question_votes, through: :questions, source: :votes
@@ -16,8 +17,9 @@ class User < ApplicationRecord
   def question_score
     question_score_total = 0
     self.questions.map do |question|
-
-      question_score_total += question.score
+      if question.score != nil
+        question_score_total += question.score
+      end
     end
     question_score_total
   end
@@ -25,23 +27,29 @@ class User < ApplicationRecord
   def question_comment_score
     question_comment_score_total = 0
     self.question_comments.map do |comment|
-      question_comment_score_total += comment.score
+      if comment.score != nil
+        question_comment_score_total += comment.score
+      end
     end
     question_comment_score_total
   end
 
   def answer_score
     answer_score_total = 0
-    self.questions.map do |question|
-      answer_score_total += question.score
+    self.answers.map do |answer|
+      if answer.score != nil
+        answer_score_total += answer.score
+      end
     end
     answer_score_total
   end
 
   def answer_comment_score
     answer_comment_score_total = 0
-    self.question_comments.map do |comment|
-      answer_comment_score_total += comment.score
+    self.answers_comments.map do |comment|
+      if comment.score != nil
+        answer_comment_score_total += comment.score
+      end
     end
     answer_comment_score_total
   end
@@ -50,6 +58,7 @@ class User < ApplicationRecord
     (question_score * 3) + question_comment_score + (answer_score * 2) + answer_comment_score
   end
 
+#############
   #creating a user password
   def password
     @password ||= BCrypt::Password.new(password_hash)

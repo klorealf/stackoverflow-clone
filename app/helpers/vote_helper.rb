@@ -2,7 +2,12 @@ module VoteHelper
   def score
     score_array = []
     self.votes.map { |vote| score_array.push(vote.vote_direction) }
-    score_array.reduce(:+)
+    current_score = score_array.reduce(:+)
+    if current_score == nil
+      current_score = 0
+    else
+      current_score
+    end
   end
 
   def upvotes
