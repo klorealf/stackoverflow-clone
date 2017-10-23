@@ -27,6 +27,13 @@ li a:hover {
     background-color: #111;
 }
 
+.answer-display{
+  padding-left: 5%;
+}
+
+.comment-display{
+  padding-left: 5%;
+}
 .container {
     width: 80%;
     margin: auto;
@@ -57,7 +64,7 @@ input[type=button], input[type=submit] {
     background-color: #ff9933;
     border: none;
     color: white;
-    padding: 16px 32px;
+    padding: 8px 16px;
     text-decoration: none;
     margin: 4px 2px;
     cursor: pointer;
@@ -102,5 +109,5 @@ input[type=button], input[type=submit] {
 }
 
 input[value=Delete] {
-  float: right;
+  float: inline;
 }

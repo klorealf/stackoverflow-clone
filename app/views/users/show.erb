@@ -1,14 +1,25 @@
 <div class="container">
 
-  <br>
-  <center><h2><%= current_user.username %>'s Profile</h2>
+  <center><div>
+    <h2><%= current_user.username %>'s Profile</h2>
+    <h3>User Score: <%= current_user.score %></h3>
+  </div></center>
 
 <center><div class="current-user-questions">
+  <h4>Questions</h4>
   <% current_user.questions.each do |question| %>
     <br>
     <a class="question-title" href='/questions/<%= question.id %>'><%= question.title %></a>
-    <div class="question-answer">Answer #: <%= question.answers.length %></div>
+    <p>
+      <span class = "question_points"> Points: <%= question.score %> |</span>
+      <span class = "question_answers">  Answers: <%= question.answers.length %> |</span>
+      <span class = "question_points">  Comments: <%= question.comments.length %></span>
+    </p>
   <%end%>
 </div></center>
 
-</div>
+<hr>
+
+<!-- For Displaying Answer and Comments use similar logic to that found above -->
+<!-- <center><div class="current-user-answers">
+  <h4>Answers</h4> -->

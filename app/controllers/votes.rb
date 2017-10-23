@@ -1,8 +1,4 @@
-# Think about displaying top vote getters for currtain catagories
-get "/votes" do
-  redirect "/"
-end
-
+# Currently Have no error messaging
 post "/upvotes/new" do
   if logged_in?
     if params[:voteable_type] == "Question"
