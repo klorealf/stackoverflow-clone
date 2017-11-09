@@ -1,0 +1,5 @@
+<form class="downvote_form" action="/downvotes/new"  method="post">
+  <input type="hidden" name="voteable_type" value=<%= vote_item.class %>>
+  <input type="hidden" name="voteable_id" value=<%= vote_item.id %>>
+  <button class="downvote" type="submit" name="submit">Downvote!</button>
+</form>

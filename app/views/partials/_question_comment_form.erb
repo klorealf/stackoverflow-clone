@@ -1,0 +1,8 @@
+<div class="form">
+  <form class="comment_form" action="/comments/new"  method="post">
+    <input type="hidden" name="commentable_type" value="Question">
+    <input type="hidden" name="commentable_id" value=<%= comment_item.id %>>
+    <iput type="text" name="commnet[body]" placeholder="Comment Here">
+    <button class="upvote" type="submit" name="submit">Create Comment!</button>
+  </form>
+</div>

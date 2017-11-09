@@ -27,6 +27,13 @@ li a:hover {
     background-color: #111;
 }
 
+.answer-display{
+  padding-left: 5%;
+}
+
+.comment-display{
+  padding-left: 5%;
+}
 .container {
     width: 80%;
     margin: auto;
@@ -57,7 +64,7 @@ input[type=button], input[type=submit] {
     background-color: #ff9933;
     border: none;
     color: white;
-    padding: 16px 32px;
+    padding: 8px 16px;
     text-decoration: none;
     margin: 4px 2px;
     cursor: pointer;
@@ -68,19 +75,28 @@ input[type=button], input[type=submit] {
   text-align: left;
 }
 
+.vote-container{
+  padding-left: 5%;
+}
+
 .new-answer {
   padding-top: 5%;
   padding-left: 15%;
 }
 
 .questions-show {
-  padding-top: 5%;
+/*  padding-top: 5%;*/
   padding-left: 5%;
 }
 
+.answer-show {
+/*  padding-top: 5%;*/
+  padding-left: 5%;
+}
 .question-body {
   font-weight: lighter;
   padding-bottom: 50px;
+  padding-left: 5%;
 }
 
 .answer-link {
@@ -88,10 +104,10 @@ input[type=button], input[type=submit] {
 }
 
 .question-answer {
-  padding-top: 10px;
+  /*padding-top: 10px;*/
   color: black;
 }
 
 input[value=Delete] {
-  float: right;
+  float: inline;
 }

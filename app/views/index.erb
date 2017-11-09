@@ -1,17 +1,12 @@
-<%= erb :"partials/_new_question", layout: false %>
-
 <div class="container">
-  <br>
 
   <% @questions.each do |question| %>
-    <h3><div class="question-title"><a href='/questions/<%= question.id %>'><%= question.title %></a></div></h3>
-    <!-- Question title: <br>
-    <h3><%= question.title %></h3> -->
-    <div class="question-answer">Answer #: <%= question.answers.length %></div>
-
-<!--     <h4>Answers</h4> -->
-
-
-    <br><br>
+    <h3 class="question-title"><a href='/questions/<%= question.id %>'><%= question.title %></a></h3>
+    <p>
+      <span class = "question_points"> Points: <%= question.score %> |</span>
+      <span class = "question_answers">  Answers: <%= question.answers.length %> |</span>
+      <span class = "question_points">  Comments: <%= question.comments.length %></span>
+    </p>
+    <br>
   <%end%>
 </div>

@@ -1,0 +1,30 @@
+<%= erb :"partials/_question", layout: false, locals: {question: @question} %>
+<%= erb :"partials/_new_answer", layout: false, locals: {question: @question} %>
+<br><hr><br>
+<div class="answer-display">
+  <h4>Answers</h4>
+  <% @question.answers.each do |answer| %>
+    <div>
+      <span><a href="/questions/<%= @question.id %>/answers/<%= answer.id %>"><%= answer.body %></a> |<span>
+      <span> Points: <%= answer.score %> |</span>
+      <span> Comments: <%= answer.score %> |</span>
+      <span> By: <%= answer.user.username %> |</span>
+      <% if own_answer?(answer) %>
+        <span><a href="/questions/<%= @question.id %>/answers/<%= answer.id %>/edit">: Edit</a> |</span>
+        <%= erb :"answers/_delete", layout: false,locals: {question: @question,   answer: answer} %></span>
+      <% end %>
+    <br><br>
+  <%end%>
+</div>
+
+<br><hr><br>
+<div class="answer-display">
+  <h4>Comments</h4>
+  <% @question.comments.each do |comment| %>
+    <div>
+      <span><%= comment.body %> |</span>
+      <span> By: <%= comment.user.username %> |</span>
+      <span> Points: <%= comment.score %></span>
+    </div>
+  <% end %>
+</div>

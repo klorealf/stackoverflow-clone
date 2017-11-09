@@ -1,0 +1,21 @@
+<div class="questions-show">
+  <a href= "/questions/<%= @question.id %>"><h2><%= @question.title %></h2></a>
+  <p>
+    <span class="question-points"> Points: <%= @question.score %> |</span>
+    <span class="question-answers">  Answers: <%= @question.answers.length %> |</span>
+    <span class="question-points">  Comments: <%= @question.comments.length %> |</span>
+    <span class="question-author"> By: <%= @question.user.username %>
+  </p>
+</div>
+<br><br>
+<div class="question-body"><%= @question.body %></div>
+<div>
+  <% if logged_in? && own_question?(@question) %>
+    <a href="/questions/<%=@question.id%>/edit">Edit Question</a>
+    <%= erb :"questions/_delete", layout: false,locals: {question: @question} %>
+  <% end %>
+</div>
+<div class="vote-container">
+  <%= erb :"partials/_upvote_form", layout: false, locals: {vote_item: @question} %>
+  <%= erb :"partials/_downvote_form", layout: false, locals: {vote_item: @question} %>
+</div>

@@ -1,14 +1,12 @@
 #will show a list of all questions
 get '/questions' do
-  @questions = Question.order('created_at DESC')
-  # There were variables decleared here that I think can possibly be better achieved using active record, put code in scrap_paper.md
-  erb :'question/index'
+  redirect "/"
 end
 
 #will provide form for creating new question
 get '/questions/new' do
   redirect "/" unless logged_in?
-  erb :'question/new'
+  erb :'questions/new'
 end
 
 post '/questions' do
@@ -26,40 +24,41 @@ end
 #show individual question
 get '/questions/:question_id' do
  @question = Question.find(params[:question_id])
- erb :"question/show"
+ erb :"questions/show"
 end
 
 #return an HTML form for editing a question
-get '/questions/:id/edit' do
-  @question = Question.find_by(id: params[:id])
+get '/questions/:question_id/edit' do
+  @question = Question.find_by(id: params[:question_id])
   if @question
-    erb :'question/edit'
+    erb :'questions/edit'
   else
-    erb :"question/index"
+    erb :"questions/index"
   end
 end
 
 #update a specific question
-put '/questions/:id' do
-  @question = Question.find_by(id: params[:id])
+put '/questions/:question_id' do
+  @question = Question.find_by(id: params[:question_id])
     # redirect "/" unless own_question?(@question)
     @question.update(params[:question])
     if @question.save
      redirect "/questions/#{@question.id}"
     else
       @errors = @question.errors.full_messages
-      erb :"question/edit"
+      erb :"questions/edit"
     end
 end
 
 #delete a specific question
-delete '/questions/:id' do
-    @question = Question.find_by(id: params[:id])
+delete '/questions/:question_id' do
+    @question = Question.find_by(id: params[:question_id])
     if own_question?(@question)
       @question.destroy
-      redirect "/questions/#{@question.id}"
+      redirect "/"
     else
-      "error"
+      # Needs error messaging
+      redirect "/questions/#{@question.id}"
     end
 end
 
